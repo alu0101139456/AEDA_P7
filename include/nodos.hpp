@@ -8,9 +8,14 @@ class nodoB_t {
   T dato_;
   nodoB_t<T>* izq_ = nullptr;
   nodoB_t<T>* der_ = nullptr;
+  int bal_ = 0;
 
  public:
   nodoB_t(){};
+
+  nodoB_t(const T dato, nodoB_t<T>* izq, nodoB_t<T>* der):
+    dato_(dato), izq_(izq), der_(der) {}
+
 
   nodoB_t(const T dato, nodoB_t<T>* izq, nodoB_t<T>* der):
     dato_(dato), izq_(izq), der_(der) {}
@@ -25,6 +30,12 @@ class nodoB_t {
   virtual inline T& get_data() { return dato_; }
 
   virtual inline bool isLeaf() { return (!izq_ && !der_);}
+
+  virtual inline void set_bal(int newbal) { bal_ = newbal; }
+  virtual inline int get_bal() { return bal_; }
+
+
+
 
 
   virtual void operator=(nodoB_t<T> nodo) {
@@ -43,6 +54,8 @@ class nodoBB_t : public nodoB_t<T> {
 
 
 };
+
+
 
 
 
