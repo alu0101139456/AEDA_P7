@@ -100,5 +100,29 @@ void arbolAVL_t<T>::Rotacion_ID(nodoB_t<T>* &nodo) {
 }
 
 
+template <class T>
+void arbolAVL_t<T>::Rotacion_DI(nodoB_t<T>* &nodo) {
+  nodoB_t<T> *nodo1 = nodo->right_ptr();
+  nodoB_t<T> *nodo2 = nodo1->left_ptr();
+  nodo->right_ptr() = nodo2->left_ptr();
+  nodo2->left_ptr() = nodo;
+  nodo1->left_ptr() = nodo2->right_ptr();
+  nodo2->right_ptr() = nodo1;
+
+  if(nodo2->get_bal() == 1) 
+    nodo1->set_bal(-1);
+  else
+    nodo1->set_bal(0);
+  
+  if(nodo2->get_bal() == -1) 
+    nodo->set_bal(1);
+  else
+    nodo->set_bal(0);
+
+  nodo2->set_bal(0);
+  nodo = nodo2;
+}
+
+
 
 
