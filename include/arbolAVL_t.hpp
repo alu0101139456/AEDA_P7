@@ -21,17 +21,17 @@ class arbolAVL_t : public arbolB_t<T> {
 
   inline nodoB_t<T>* Buscar(T dato) { BuscarRama( this->getRaiz(), dato); }
 
-  void InsertaBal(nodoB_t<T>* &nodo, nodoB_t<T>* nuevo, bool& crece);
-  void InsertReBalIzq(nodoB_t<T>* nodo);
-  void InsertReBalDer(nodoB_t<T>* nodo);
+  void InsertaBal(nodoB_t<T>* &nodo, nodoB_t<T>* nuevo, bool &crece);
+  void InsertReBalIzq(nodoB_t<T>* &nodo, bool &crece);
+  void InsertReBalDer(nodoB_t<T>* &nodo, bool &crece);
 
   void Eliminar(T clavedada);
-  void EliminarRama(nodoB_t<T>* &nodo, T clave, bool& decrece);
+  void EliminarRama(nodoB_t<T>* &nodo, T clave, bool &decrece);
 
   void Sustituye(nodoB_t<T>* &eliminado, nodoB_t<T>* &sust, bool &decrece);
 
-  void EliminarReBalIzq(nodoB_t<T>* &nodo, bool& decrece);
-  void EliminarReBalDer(nodoB_t<T>* &nodo, bool& decrece);
+  void EliminarReBalIzq(nodoB_t<T>* &nodo, bool &decrece);
+  void EliminarReBalDer(nodoB_t<T>* &nodo, bool &decrece);
 
  private:
   nodoB_t<T>* BuscarRama( nodoB_t<T> *nodo, T dato);
@@ -158,5 +158,48 @@ void arbolAVL_t<T>::InsertaBal(nodoB_t<T>* &nodo, nodoB_t<T> *nuevo, bool &crece
 }
 
 
+template<class T>
+void arbolAVL_t<T>::InsertReBalIzq(nodoB_t<T>* &nodo, bool &crece) {
+  nodoB_t<T>* aux;
+  switch ( nodo->get_bal()) {
+    case -1:
+        nodo->set_bal(0);
+        crece = false;
+      break;
+    case 0:
+        nodo->set_bal(1);
+      break;
+    case 1:
+        aux = nodo->left_ptr();
+        if(aux->get_bal() == 1)
+          Rotacion_II(nodo);
+        else
+          Rotacion_ID(nodo);
+        crece = false;
+      break;
+  }
+}
+
+template<class T>
+void arbolAVL_t<T>::InsertReBalDer(nodoB_t<T>* &nodo, bool &crece) {
+  nodoB_t<T>* aux;
+  switch ( nodo->get_bal()) {
+    case 1:
+        nodo->set_bal(0);
+        crece = false;
+      break;
+    case 0:
+        nodo->set_bal(-1);
+      break;
+    case -1:
+        aux = nodo->right_ptr();
+        if(aux->get_bal() == -1)
+          Rotacion_DD(nodo);
+        else
+          Rotacion_DI(nodo);
+        crece = false;
+      break;
+  }
+}
 
 
