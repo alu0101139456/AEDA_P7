@@ -16,10 +16,6 @@ class nodoB_t {
   nodoB_t(const T dato, nodoB_t<T>* izq, nodoB_t<T>* der):
     dato_(dato), izq_(izq), der_(der) {}
 
-
-  nodoB_t(const T dato, nodoB_t<T>* izq, nodoB_t<T>* der):
-    dato_(dato), izq_(izq), der_(der) {}
-
   nodoB_t(const T dato):
     dato_(dato) {}
 
