@@ -133,7 +133,13 @@ void arbolAVL_t<T>::Rotacion_DI(nodoB_t<T>* &nodo) {
 
 template<class T>
 void arbolAVL_t<T>::Insertar(T claveDada) {
-  if ()
+  if (Buscar(claveDada)) return;
+  nodoB_t<T>* aux = new nodoB_t<T>(claveDada);
+  bool crece = false;
+  InsertaBal( this->getRaiz(), aux, crece);
 }
+
+
+
 
 
