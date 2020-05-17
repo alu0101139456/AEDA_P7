@@ -44,17 +44,35 @@ class arbolAVL_t : public arbolB_t<T> {
 
 template<class T>
 void arbolAVL_t<T>::Rotacion_II(nodoB_t<T>* &nodo) {
-  nodoB_t<T>* nodo1 = nodo->left_ptr();
-  nodo->left_ptr = nodo1->right_ptr();
-  nodo1->right_ptr = nodo;
+  nodoB_t<T>* aux = nodo->left_ptr();
+  nodo->left_ptr = aux->right_ptr();
+  aux->right_ptr = nodo;
 
-  if(nodo1->get_bal() == 1) {
+  if(aux->get_bal() == 1) {
     nodo->set_bal(0);
-    nodo1->set_bal(0);
+    aux->set_bal(0);
   }
   else {
     nodo->set_bal(1);
-    nodo1->set_bal(-1);
+    aux->set_bal(-1);
   }
-  nodo = nodo1;
+  nodo = aux;
 }
+
+template<class T>
+void arbolAVL_t<T>::Rotacion_DD(nodoB_t<T>* &nodo) {
+  nodoB_t<T>* aux = nodo->right_ptr();
+  nodo->right_ptr() = aux->left_ptr();
+  aux->left_ptr() = nodo;
+
+  if( aux->get_bal() == -1) {
+    nodo->set_bal(0);
+    aux->set_bal(0);
+  }
+  else {
+    nodo->set_bal(-1);
+    aux->set_bal(1);
+  }
+  nodo = aux;
+}
+
