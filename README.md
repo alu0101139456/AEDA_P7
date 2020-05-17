@@ -7,7 +7,7 @@
 **En el include:**
 - [arbolB_t.hpp](https://github.com/alu0101139456/AEDA_P7/blob/master/include/arbolB_t.hpp)
 - [arbolBB_t.hpp](https://github.com/alu0101139456/AEDA_P7/blob/master/include/arbolBB_t.hpp)
-- [arbolAVL_t.hpp]
+- [arbolAVL_t.hpp](https://github.com/alu0101139456/AEDA_P7/blob/master/include/arbolAVL_t.hpp)
 - [Contador_t.hpp](https://github.com/alu0101139456/AEDA_P7/blob/master/include/Contador_t.hpp)
 - [nodos.hpp](https://github.com/alu0101139456/AEDA_P7/blob/master/include/nodos.hpp)
 - [dni_t.hpp](https://github.com/alu0101139456/AEDA_P7/blob/master/include/dni_t.hpp)
