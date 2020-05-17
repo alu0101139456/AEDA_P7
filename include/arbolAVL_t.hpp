@@ -139,6 +139,23 @@ void arbolAVL_t<T>::Insertar(T claveDada) {
   InsertaBal( this->getRaiz(), aux, crece);
 }
 
+template<class T>
+void arbolAVL_t<T>::InsertaBal(nodoB_t<T>* &nodo, nodoB_t<T> *nuevo, bool &crece) {
+  if( !nodo) {
+    nodo = nuevo;
+    crece = true;
+  }
+  else if ( nuevo->get_data() < nodo->get_data()) {
+    InsertaBal(nodo->left_ptr(), nuevo, crece);
+    if(crece)
+      InsertReBalIzq(nodo, crece);
+    }
+    else {
+      InsertaBal(nodo->right_ptr(), nuevo, crece);
+      if(crece)
+        InsertReBalDer(nodo, crece);
+    }
+}
 
 
 
