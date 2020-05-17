@@ -9,9 +9,6 @@
 template <class T>
 class arbolAVL_t : public arbolB_t<T> {
 
- private:
-    
-
  public:
 
   void Rotacion_II(nodoB_t<T>* &nodo);
@@ -21,6 +18,8 @@ class arbolAVL_t : public arbolB_t<T> {
 
   void Insertar(T claveDada);
 
+
+  inline nodoB_t<T>* Buscar(T dato) { BuscarRama( this->getRaiz(), dato); }
 
   void InsertaBal(nodoB_t<T>* &nodo, nodoB_t<T>* nuevo, bool& crece);
   void InsertReBalIzq(nodoB_t<T>* nodo);
@@ -34,12 +33,21 @@ class arbolAVL_t : public arbolB_t<T> {
   void EliminarReBalIzq(nodoB_t<T>* &nodo, bool& decrece);
   void EliminarReBalDer(nodoB_t<T>* &nodo, bool& decrece);
 
-
+ private:
+  nodoB_t<T>* BuscarRama( nodoB_t<T> *nodo, T dato);
     
 
 
 
 };
+
+template<class T>
+nodoB_t<T>* arbolAVL_t<T>::BuscarRama( nodoB_t<T>* nodo, T dato) {
+  if(!nodo) return nullptr;
+  if(dato == nodo->get_data()) return nodo;
+  if(dato < nodo->get_data()) return BuscarRama(nodo->left_ptr(), dato);
+  return BuscarRama(nodo->right_ptr(), dato);
+}
 
 
 template<class T>
@@ -123,6 +131,9 @@ void arbolAVL_t<T>::Rotacion_DI(nodoB_t<T>* &nodo) {
   nodo = nodo2;
 }
 
-
+template<class T>
+void arbolAVL_t<T>::Insertar(T claveDada) {
+  if ()
+}
 
 
