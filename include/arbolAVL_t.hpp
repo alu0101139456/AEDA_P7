@@ -26,7 +26,8 @@ class arbolAVL_t : public arbolB_t<T> {
   void InsertReBalDer(nodoB_t<T>* &nodo, bool &crece);
 
   void Eliminar(T clavedada);
-  void EliminarRama(nodoB_t<T>* &nodo, T clave, bool &decrece);
+  void EliminarRama(nodoB_t<T>* &nodo, T dato, bool &decrece);
+
 
   void Sustituye(nodoB_t<T>* &eliminado, nodoB_t<T>* &sust, bool &decrece);
 
@@ -203,3 +204,41 @@ void arbolAVL_t<T>::InsertReBalDer(nodoB_t<T>* &nodo, bool &crece) {
 }
 
 
+template<class T>
+void arbolAVL_t<T>::Eliminar(T dato) {
+  bool decrece = false;
+  EliminarRama(this->getRaiz(), dato, decrece);
+}
+
+
+template<class T>
+void arbolAVL_t<T>::EliminarRama(nodoB_t<T>* &nodo, T dato, bool &decrece) {
+  if(!nodo) return;
+  if(dato < nodo->get_data()) {
+    EliminarRama(nodo->left_ptr(), dato, decrece);
+    if(decrece)
+      EliminarReBalIzq(nodo, decrece);
+  }
+  else if (dato > nodo->get_data()) {
+    eliminar rama(nodo->right_ptr(), dato, decrece);
+    if(decrece)
+      EliminarReBalDer(nodo, decrece);
+  else {
+    nodoB_t<T>* eliminado = nodo;
+    if(!nodo->left_ptr()) {
+      nodo = nodo->right_ptr();
+      decrece = true;
+    }
+    else if (nodo->right_ptr()) {
+      nodo = nodo->left_ptr();
+      decrece = true;
+    }
+    else {
+      Sustituye(eliminado, nodo->left_ptr(), decrece);
+      if(decrece) 
+        EliminarReBalIzq(nodo, decrece);
+    }
+    delete eliminado;
+  }
+  
+}
