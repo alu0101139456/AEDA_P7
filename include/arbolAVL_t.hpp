@@ -298,3 +298,17 @@ void arbolAVL_t<T>::EliminarReBalDer(nodoB_t<T>* &nodo, bool &decrece)
   }
 }
 
+template<class T>
+void arbolAVL_t<T>::Sustituye(nodoB_t<T>* &eliminado, nodoB_t<T>* &sustituto, bool &decrece) {
+  if (!sustituto->right_ptr()) {
+    Sustituye(eliminado, sustituto->right_ptr(), decrece);
+    if(decrece) 
+      EliminarReBalDer(sustituto, decrece);
+  }
+  else {
+    eliminado->set_data(sustituto->get_data());
+    eliminado = sustituto;
+    sustituto = sustituto->left_ptr();
+    decrece = true;
+  }
+}
