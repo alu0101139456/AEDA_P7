@@ -271,7 +271,7 @@ void arbolAVL_t<T>::EliminarReBalIzq(nodoB_t<T>* &nodo, bool &decrece) {
 }
 
 template <class T>
-void arbolAVL_t<T>::EliminarReBalIzq(nodoB_t<T>* &nodo, bool &decrece) 
+void arbolAVL_t<T>::EliminarReBalDer(nodoB_t<T>* &nodo, bool &decrece) 
 {
   nodoB_t<T> *aux; 
   switch (nodo->get_bal())
