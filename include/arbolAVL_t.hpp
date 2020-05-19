@@ -2,7 +2,7 @@
 
 
 #include "arbolB_t.hpp"
-#include "nodos.hpp"
+
 
 
 
@@ -45,7 +45,6 @@ class arbolAVL_t : public arbolB_t<T> {
 template<class T>
 nodoB_t<T>* arbolAVL_t<T>::BuscarRama( nodoB_t<T>* nodo, T dato) {
   if(!nodo) return nullptr;
-  std::cout << "DSDS";
   if(dato == nodo->get_data()) return nodo;
   if(dato < nodo->get_data()) return BuscarRama(nodo->left_ptr(), dato);
   return BuscarRama(nodo->right_ptr(), dato);
@@ -135,6 +134,7 @@ void arbolAVL_t<T>::Rotacion_DI(nodoB_t<T>* &nodo) {
 
 template<class T>
 void arbolAVL_t<T>::Insertar(T claveDada) {
+  // if (Buscar(claveDada)) return;
   nodoB_t<T>* aux = new nodoB_t<T>(claveDada);
   bool crece = false;
   InsertaBal( this->getRaiz(), aux, crece);
@@ -142,7 +142,6 @@ void arbolAVL_t<T>::Insertar(T claveDada) {
 
 template<class T>
 void arbolAVL_t<T>::InsertaBal(nodoB_t<T>* &nodo, nodoB_t<T> *nuevo, bool &crece) {
-
   if( !nodo) {
     nodo = nuevo;
     crece = true;
@@ -212,8 +211,8 @@ void arbolAVL_t<T>::Eliminar(T dato) {
 }
 
 
-template<>
-void arbolAVL_t<dni_t>::EliminarRama(nodoB_t<dni_t>* &nodo, dni_t dato, bool &decrece) {
+template<class T>
+void arbolAVL_t<T>::EliminarRama(nodoB_t<T>* &nodo, T dato, bool &decrece) {
   if(!nodo) return;
   if(dato < nodo->get_data()) {
     EliminarRama(nodo->left_ptr(), dato, decrece);
@@ -226,12 +225,12 @@ void arbolAVL_t<dni_t>::EliminarRama(nodoB_t<dni_t>* &nodo, dni_t dato, bool &de
       EliminarReBalDer(nodo, decrece);
   }
   else {
-    nodoB_t<dni_t>* eliminado = nodo;
+    nodoB_t<T>* eliminado = nodo;
     if(!nodo->left_ptr()) {
       nodo = nodo->right_ptr();
       decrece = true;
     }
-    else if ( !nodo->right_ptr()) {
+    else if (!nodo->right_ptr()) {
       nodo = nodo->left_ptr();
       decrece = true;
     }
@@ -242,8 +241,6 @@ void arbolAVL_t<dni_t>::EliminarRama(nodoB_t<dni_t>* &nodo, dni_t dato, bool &de
     }
     delete eliminado;
     }
-  
-  } 
 }
 
 template <class T>
@@ -268,70 +265,37 @@ void arbolAVL_t<T>::EliminarReBalIzq(nodoB_t<T>* &nodo, bool &decrece) {
       break;
     case 1:
         nodo->set_bal(0);
-
+      break;
   }
 }
 
-
 template <class T>
-void arbolAVL_t<T>::EliminarReBalDer(nodoB_t<T>* &nodo, bool &decrece) {
+void arbolAVL_t<T>::EliminarReBalDer(nodoB_t<T>* &nodo, bool &decrece) 
+{
   nodoB_t<T> *aux; 
   switch (nodo->get_bal())
   {
     case -1:
-        aux = nodo->right_ptr();
+        nodo->set_bal(0);
+      break;
+
+    case 0:
+        nodo->set_bal(1);
+        decrece = false;
+      break;
+    case 1:
+        aux = nodo->left_ptr();
         if(aux->get_bal() > 0) 
-          Rotacion_DI(nodo);
+          Rotacion_ID(nodo);
         else { 
           if(aux->get_bal() == 0)
           decrece = false;
     
-          Rotacion_DD(nodo);
+          Rotacion_II(nodo);
         }
       break;
-    case 0:
-        nodo->set_bal(-1);
-        decrece = false;
-      break;
-    case 1:
-        nodo->set_bal(0);
-
   }
 }
-
-
-
-
-
-
-
-
-
-
-// template <class T>
-// void arbolAVL_t<T>::EliminarReBalDer(nodoB_t<T>* &nodo, bool &decrece) 
-// {
-//   nodoB_t<T> *aux; 
-//   switch (nodo->get_bal())
-//   {
-//     case 1:
-//         aux = nodo->left_ptr();
-//         if(aux->get_bal() > 0) 
-//           Rotacion_ID(nodo);
-//         else { 
-//           if(aux->get_bal() == 0)
-//           decrece = false;    
-//           Rotacion_II(nodo);
-//         }
-//       break;    
-//     case 0:
-//         nodo->set_bal(1);
-//         decrece = false;
-//       break;
-//     case -1:
-//         nodo->set_bal(0);
-//   }
-// }
 
 template<class T>
 void arbolAVL_t<T>::Sustituye(nodoB_t<T>* &eliminado, nodoB_t<T>* &sustituto, bool &decrece) {
