@@ -38,6 +38,25 @@ arbolAVL_t<dni_t> arbol;
   int op = -1;
   int temp;
   system("clear");
+
+
+  //DEBUG
+            aux = 10; 
+            arbol.Insertar(aux);
+              aux = 9; 
+            arbol.Insertar(aux);
+              aux = 6; 
+            arbol.Insertar(aux);
+              aux = 1; 
+            arbol.Insertar(aux);
+              aux = 3; 
+            arbol.Insertar(aux);
+              aux = 8; 
+            arbol.Insertar(aux);
+              aux = 5; 
+            arbol.Insertar(aux);
+            
+
   while (bucle)
   {
     printdemo1();
@@ -73,10 +92,7 @@ arbolAVL_t<dni_t> arbol;
         }
         arbol.writeRecorrido(4); 
         cleanAndWait();       
-          // std::cin.ignore();
-          // std::cout << "Presione una tecla para continuar";
-          // std::cin.ignore();
-          // system("clear");
+
         break;
       case 4:
         system("clear");
@@ -88,10 +104,7 @@ arbolAVL_t<dni_t> arbol;
         std::cin >> temp;
         arbol.writeRecorrido(temp);
         cleanAndWait();
-        // std::cin.ignore();
-        // std::cout << "Presione una tecla para continuar";
-        // std::cin.ignore();
-        // system("clear");
+
         break;
 
       default:
@@ -125,7 +138,8 @@ using std::get;
   {
     int index = rand() % N;
     arbol.Buscar(banco[index]);
-    dni_t::contador.endCount();
+    dni_t::contador.endCount(); 
+
   }
   std::cout << "\nBusquedas";
   printResults(nPruebas);
