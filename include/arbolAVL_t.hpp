@@ -220,7 +220,7 @@ void arbolAVL_t<T>::EliminarRama(nodoB_t<T>* &nodo, T dato, bool &decrece) {
       EliminarReBalIzq(nodo, decrece);
   }
   else if (dato > nodo->get_data()) {
-    eliminar rama(nodo->right_ptr(), dato, decrece);
+    EliminarRama(nodo->right_ptr(), dato, decrece);
     if(decrece)
       EliminarReBalDer(nodo, decrece);
   else {
@@ -239,6 +239,62 @@ void arbolAVL_t<T>::EliminarRama(nodoB_t<T>* &nodo, T dato, bool &decrece) {
         EliminarReBalIzq(nodo, decrece);
     }
     delete eliminado;
-  }
+    }
   
+  } 
 }
+
+template <class T>
+void arbolAVL_t<T>::EliminarReBalIzq(nodoB_t<T>* &nodo, bool &decrece) {
+  nodoB_t<T> *aux; 
+  switch (nodo->get_bal())
+  {
+    case -1:
+        aux = nodo->right_ptr();
+        if(aux->get_bal() > 0) 
+          Rotacion_DI(nodo);
+        else { 
+          if(aux->get_bal() == 0)
+          decrece = false;
+    
+          Rotacion_DD(nodo);
+        }
+      break;
+    case 0:
+        nodo->set_bal(-1);
+        decrece = false;
+      break;
+    case 1:
+        nodo->set_bal(0);
+      break;
+  }
+}
+
+template <class T>
+void arbolAVL_t<T>::EliminarReBalIzq(nodoB_t<T>* &nodo, bool &decrece) 
+{
+  nodoB_t<T> *aux; 
+  switch (nodo->get_bal())
+  {
+    case -1:
+        nodo->set_bal(0);
+      break;
+
+    case 0:
+        nodo->set_bal(1);
+        decrece = false;
+      break;
+    case 1:
+        aux = nodo->left_ptr();
+        if(aux->get_bal() > 0) 
+          Rotacion_ID(nodo);
+        else { 
+          if(aux->get_bal() == 0)
+          decrece = false;
+    
+          Rotacion_II(nodo);
+        }
+      break;
+  }
+}
+
