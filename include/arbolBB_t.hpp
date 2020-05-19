@@ -79,7 +79,7 @@ void arbolBB_t<T>::Sustituye( nodoB_t<T>* &eliminado, nodoB_t<T>* &sustituto) {
     Sustituye(eliminado, sustituto->right_ptr());
   }
   else {
-    eliminado->set_data(sustituto/*->get_data()*/);
+    eliminado->set_data(sustituto);
     eliminado = sustituto;
     sustituto = sustituto->left_ptr();
   }

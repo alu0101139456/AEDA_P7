@@ -34,7 +34,7 @@ class arbolB_t {
   //Modoficación:  
   inline const bool Equilibrado() { return EquilibrioRama( this->getRaiz() ); }
 
- protected:
+//  protected:
   const bool EquilibrioRama( nodoB_t<T>* nodo);
   inline nodoB_t<T>* &getRaiz() { return raiz_; }
   void setRaiz( nodoB_t<T>* nodo) { raiz_ = nodo; }
