@@ -21,26 +21,28 @@ class arbolB_t {
 
   inline const int Tam() { return TamRama(getRaiz()); }  
   inline const int Altura(nodoB_t<T>* nodo) { return AlturaNodo(getRaiz()); }  
-  void RecorreNiveles(nodoB_t<T>* nodo);
+
   inline bool EsHoja(nodoB_t<T>* nodo) { return nodo->isLeaf(); }
   inline bool EsVacio(nodoB_t<T>* nodo) { return !nodo; }
   //Recorridos
   void writeRecorrido(int);
-  void PreOrden(nodoB_t<T>* nodo);
-  void InOrden(nodoB_t<T>* nodo);
-  void PostOrden(nodoB_t<T>* nodo);
-  void Muestra(nodoB_t<T>* nodo);  
+
 
   //Modoficación:  
   inline const bool Equilibrado() { return EquilibrioRama( this->getRaiz() ); }
 
-//  protected:
+ protected:
   const bool EquilibrioRama( nodoB_t<T>* nodo);
   inline nodoB_t<T>* &getRaiz() { return raiz_; }
   void setRaiz( nodoB_t<T>* nodo) { raiz_ = nodo; }
   void Podar(nodoB_t<T>* &nodo);
   const int TamRama(nodoB_t<T>* nodo);
   const int AlturaNodo(nodoB_t<T>* nodo);  
+  void RecorreNiveles(nodoB_t<T>* nodo);
+  void PreOrden(nodoB_t<T>* nodo);
+  void InOrden(nodoB_t<T>* nodo);
+  void PostOrden(nodoB_t<T>* nodo);
+  void Muestra(nodoB_t<T>* nodo);  
 
 };
 
