@@ -10,6 +10,7 @@
 void printResults(int p);
 
 void printdemo1(void) {
+  std::cout << "Traza AVL. Ángel Julián Bolaño Campos\n";
   std::cout << "\n¿Qué desea hacer?\n";
   std::cout << " 1 - Insertar clave.\n";
   std::cout << " 2 - Eliminar clave.\n";
@@ -31,6 +32,8 @@ int main() {
 
 
 arbolAVL_t<dni_t> arbol;
+
+  
 #ifdef DEMO
   dni_t aux; //Usaremos aux para valores pequeños de demo
   int demo_int;
@@ -38,23 +41,6 @@ arbolAVL_t<dni_t> arbol;
   int op = -1;
   int temp;
   system("clear");
-
-
-  //DEBUG
-            aux = 10; 
-            arbol.Insertar(aux);
-              aux = 9; 
-            arbol.Insertar(aux);
-              aux = 6; 
-            arbol.Insertar(aux);
-              aux = 1; 
-            arbol.Insertar(aux);
-              aux = 3; 
-            arbol.Insertar(aux);
-              aux = 8; 
-            arbol.Insertar(aux);
-              aux = 5; 
-            arbol.Insertar(aux);
             
 
   while (bucle)
