@@ -40,8 +40,8 @@ class dni_t {
 };
 
 std::ostream& dni_t::printDni(std::ostream& os) const {
-  // os.fill('0');
-  // os.width(8);
+  os.fill('0');
+  os.width(8);
   os << numeroDni_ << "";
   return os;
 
